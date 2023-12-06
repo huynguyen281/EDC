@@ -5,7 +5,7 @@
       <div class="h-1/2 bg-[url('/images/background.jpg')] flex justify-center items-center">
         <div class="flex flex-col justify-center items-center gap-8">
           <div class="text-5xl">Welcome to our system !</div>
-          <div class="text-xl">Make your monitoring and controlling devices easier !!</div>
+          <div class="text-xl">Make your monitoring and controlling devices easier  !!</div>
         </div>
       </div>
       <!-- Content -->
