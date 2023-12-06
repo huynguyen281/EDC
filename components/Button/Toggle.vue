@@ -1,0 +1,205 @@
+<template>
+    <div class="flex flex-col justify-center items-center gap-3">
+        <button type="button" :disabled="disabled" :class="['btn', { 'active' : isActive }, { 'animating' : isAnimation } ]" @click="clickHandler">
+            <span>
+            <b></b>
+            <svg viewBox="-5.5 -5.5 71 71" id="circle">
+                <circle cx="30" cy="30" r="30" stroke="white" stroke-width="11" fill="transparent"></circle>
+            </svg>
+            </span>
+        </button>
+        <div class="font-bold w-fit">
+            {{ isActive ? 'ON' : 'OFF' }}
+        </div>
+    </div>
+</template>
+<script lang="ts" setup>
+defineProps({
+    isActive: {
+        type: Boolean,
+        default: false,
+    },
+    disabled: {
+        type: Boolean,
+        default: false,
+    }
+})
+const isAnimation = ref(false);
+const emits = defineEmits(['updateStatus']);
+const updateStatus = () => {
+    emits('updateStatus');
+}
+const clickHandler = () => {
+    isAnimation.value = true
+    setTimeout(() => {
+        updateStatus();
+    }, 500)
+}
+</script>
+<style>
+:root {
+  --timing: cubic-bezier(.645,.045,.355,1);
+  --primary: #f4f7f5;
+}
+
+button {
+  --w: 4em;
+  --bg: rgb(var(--rgb));
+  --bga: rgba(var(--rgb), .4); /* Safari fix */
+  -webkit-appearance: none;
+  border: none;
+  font-size: 100%;
+  width: var(--w);
+  height: var(--w);
+  background: var(--bg);
+  background-color: var(--bg)!important;
+  box-shadow: 0 3px 12px 2px var(--bga);
+  border-radius: 50%;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  transition: .1s transform, .3s box-shadow;
+  will-change: transform, box-shadow;
+  backface-visibility: hidden;
+}
+
+button:disabled {
+    background-color: gray!important;
+}
+
+button > * {
+  pointer-events: none;
+}
+
+button:focus {
+  outline: none;
+}
+
+button:active {
+  transform: scale(.97);
+}
+
+button:after {
+  --bg: rgb(var(--rgb));
+  content: '';
+  position: absolute;
+  top: -15%;
+  left: -15%;
+  width: 200%;
+  height: 200%;
+  background: var(--bg);
+  border-radius: inherit;
+  transform: translate(5%, 5%) scale(.03);
+  pointer-events: none;
+}
+
+button.animating:after {
+  animation: c .5s cubic-bezier(.5, 0, .5, 1) backwards;
+}
+
+button.active,
+button:not(.active):after {
+  --rgb: 64, 227, 120;
+}
+
+button:not(.active),
+button.active:after {
+  --rgb: 229, 55, 94;
+}
+
+@keyframes c {
+  to {
+    transform: none;
+  }
+}
+
+button span {
+  display: inline-block;
+  position: relative;
+  margin-top: 5px;
+}
+button b {
+  --w: 7px;
+  overflow: hidden;
+  border-radius: var(--w);
+  display: grid;
+  width: var(--w);
+  height: 35px;
+  top: 0;
+  left: 50%;
+  position: absolute;
+  transform: translateX(-50%);
+  z-index: 3;
+  will-change: transform;
+}
+button b:before {
+  content: '';
+  background: #fff;
+  width: 100%;
+  height: 100%;
+  border-radius: var(--w);
+  transform: translateY(-15px);
+  transition-timing-function: var(--timing);
+  transition: .5s;
+}
+
+button.active b:before {
+  transform: translateY(12px);
+  transition-delay: .27s;
+  transition-timing-function: cubic-bezier(.25, .25, .25, 1.25);
+}
+
+button svg {
+  --dash: 190;
+  stroke-linecap: round;
+  stroke-dasharray: var(--dash);
+  stroke-dashoffset: var(--dash);
+  width: 40px;
+  height: 40px;
+  transform: scaleX(-1) rotate(-89deg);
+  transition: .4s;
+  transition-timing-function: var(--timing);
+  margin: auto;
+  position: relative;
+  z-index: 1;
+  will-change: transform, stroke-dashoffset;
+}
+button:not(.active) svg {
+  stroke-dashoffset: 40;
+  transform: scaleX(-1) rotate(-52deg);
+  transition: .5s .25s;
+}
+
+
+
+aside {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  width: 100%;
+  padding: 0 2em 2em;
+  font-family: 'Pacifico', cursive;
+}
+
+aside a {
+  text-decoration: underline;
+  color: #E65289;
+  display: flex;
+  align-items: center;
+}
+
+aside a:hover,
+aside a:focus {
+  color: #000;
+  text-decoration: none;
+}
+
+.dribbble-logo {
+  width: 18px;
+  height: 18px;
+  margin-right: 5px;
+}
+</style>
