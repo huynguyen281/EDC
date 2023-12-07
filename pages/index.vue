@@ -10,36 +10,50 @@
       </div>
       <!-- Content -->
       <div class="p-12">
-        <div class="grid grid-rows-4 grid-cols-3 grid-flow-col gap-8 h-[600px]">
-          <CardInfo class="row-span-4 h-full">
+        <div class="grid grid-rows-6 grid-cols-3 grid-flow-col gap-8 h-[600px]">
+          <CardInfo class="row-span-6 h-full">
             <div class="w-full h-full p-12 flex flex-col gap-4">
-              <div class="text-4xl font-semibold">System status</div>
+              <div class="text-4xl font-semibold">System Manage</div>
               <div class="h-[1px] bg-gray-400/60"></div>
-              <div class="text-2xl">Sat, 02/08/2023 - 18:40:32</div>
-              <div class="flex flex-col gap-4 text-lg tracking-wide">
-                <div class="flex gap-2">
-                  <div class="font-semibold flex items-center justify-start gap-3">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24"><path fill="currentColor" d="M12 21q-1.05 0-1.775-.725T9.5 18.5q0-1.05.725-1.775T12 16q1.05 0 1.775.725T14.5 18.5q0 1.05-.725 1.775T12 21Zm0-11q1.875 0 3.563.6t3.062 1.65q.5.375.513.988T18.7 14.3q-.425.425-1.05.438t-1.125-.338q-.95-.65-2.1-1.025T12 13q-1.275 0-2.425.375t-2.1 1.025q-.5.35-1.125.325t-1.05-.45q-.425-.45-.425-1.062t.5-.988q1.375-1.05 3.063-1.638T12 10Zm0-6q3.125 0 5.888 1.025t4.962 2.9q.5.425.525 1.05t-.425 1.075q-.425.425-1.05.438t-1.125-.388q-1.8-1.475-4.037-2.287T12 7q-2.5 0-4.737.813T3.225 10.1q-.5.4-1.125.388t-1.05-.438Q.6 9.6.625 8.975t.525-1.05q2.2-1.875 4.963-2.9T12 4Z"/></svg>
-                    <span>WIFI connection:</span>
-                  </div> 
-                  <span class="flex items-center gap-2 opacity-60">
-                    {{ wifi }}
-                  </span>
+              <!-- <div class="text-2xl">Sat, 02/08/2023 - 18:40:32</div> -->
+              <div class="flex flex-col gap-5 text-lg tracking-wide">
+                <div class="flex flex-col gap-2">
+                  <div class="text-2xl mb-2">MQTT Information</div>
+                  <InfoLine label="State" :text="client.connected ? 'Connected' : 'Disconnected'">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24"><path fill="currentColor" d="M4 1h16a1 1 0 0 1 1 1v4a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1m0 8h16a1 1 0 0 1 1 1v4a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-4a1 1 0 0 1 1-1m0 8h16a1 1 0 0 1 1 1v4a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-4a1 1 0 0 1 1-1M9 5h1V3H9v2m0 8h1v-2H9v2m0 8h1v-2H9v2M5 3v2h2V3H5m0 8v2h2v-2H5m0 8v2h2v-2H5Z"/></svg>
+                  </InfoLine>
+                  <InfoLine label="Host" :text="connection.host">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2a9 9 0 0 0-9 9v11l3-3l3 3l3-3l3 3l3-3l3 3V11a9 9 0 0 0-9-9M9 8a2 2 0 0 1 2 2a2 2 0 0 1-2 2a2 2 0 0 1-2-2a2 2 0 0 1 2-2m6 0a2 2 0 0 1 2 2a2 2 0 0 1-2 2a2 2 0 0 1-2-2a2 2 0 0 1 2-2Z"/></svg>
+                  </InfoLine>
+                  <InfoLine label="Port" :text="connection.port.toString()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24"><path fill="currentColor" d="M9 9v1H5V4h1V2H1v2h1v7a2 2 0 0 0 2 2h5v1h2V9Zm13 11v-8a2 2 0 0 0-2-2h-5V9h-2v5h2v-1h4v7h-1v2h5v-2Z"/></svg>
+                  </InfoLine>
                 </div>
-                <div class="flex gap-2">
-                  <div class="font-semibold flex items-center justify-start gap-3">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24"><path fill="currentColor" d="M20.245 4.004c.967 0 1.75.784 1.75 1.75V18.25a1.75 1.75 0 0 1-1.75 1.75h-7.247c-.087 0-.172-.007-.256-.019V4.023c.083-.012.169-.019.256-.019h7.247Zm-9.247-.002a1.8 1.8 0 0 1 .245.017V19.98a1.8 1.8 0 0 1-.245.017H3.75A1.75 1.75 0 0 1 2 18.247V5.752c0-.967.784-1.75 1.75-1.75h7.248ZM19.75 6.5h-4.502a.75.75 0 0 0-.101 1.493l.101.007h4.502a.75.75 0 0 0 .102-1.493L19.75 6.5Z"/></svg>
-                    <span>Activity State:</span>
-                  </div> 
-                  <span class="flex items-center gap-2 opacity-60">
-                    {{ state }}
-                  </span>
-                </div>
+                
+                <div class="w-full h-[1px] bg-gray-400/60"></div>
 
+                <div class="flex flex-col gap-2">
+                  <div class="text-2xl mb-2">Device Information</div>
+                  <InfoLine label="WIFI connection" :text="wifi">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24"><path fill="currentColor" d="M12 21q-1.05 0-1.775-.725T9.5 18.5q0-1.05.725-1.775T12 16q1.05 0 1.775.725T14.5 18.5q0 1.05-.725 1.775T12 21Zm0-11q1.875 0 3.563.6t3.062 1.65q.5.375.513.988T18.7 14.3q-.425.425-1.05.438t-1.125-.338q-.95-.65-2.1-1.025T12 13q-1.275 0-2.425.375t-2.1 1.025q-.5.35-1.125.325t-1.05-.45q-.425-.45-.425-1.062t.5-.988q1.375-1.05 3.063-1.638T12 10Zm0-6q3.125 0 5.888 1.025t4.962 2.9q.5.425.525 1.05t-.425 1.075q-.425.425-1.05.438t-1.125-.388q-1.8-1.475-4.037-2.287T12 7q-2.5 0-4.737.813T3.225 10.1q-.5.4-1.125.388t-1.05-.438Q.6 9.6.625 8.975t.525-1.05q2.2-1.875 4.963-2.9T12 4Z"/></svg>
+                  </InfoLine>
+                  <InfoLine label="Activity State" :text="state">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24"><path fill="currentColor" d="M20.245 4.004c.967 0 1.75.784 1.75 1.75V18.25a1.75 1.75 0 0 1-1.75 1.75h-7.247c-.087 0-.172-.007-.256-.019V4.023c.083-.012.169-.019.256-.019h7.247Zm-9.247-.002a1.8 1.8 0 0 1 .245.017V19.98a1.8 1.8 0 0 1-.245.017H3.75A1.75 1.75 0 0 1 2 18.247V5.752c0-.967.784-1.75 1.75-1.75h7.248ZM19.75 6.5h-4.502a.75.75 0 0 0-.101 1.493l.101.007h4.502a.75.75 0 0 0 .102-1.493L19.75 6.5Z"/></svg>
+                  </InfoLine>
+                  <div class="w-full mt-2">
+                      <div
+                        class="w-fit px-2 h-10 flex items-center justify-center rounded-lg bg-green-500 cursor-pointer
+                          hover:shadow-md hover:bg-green-600 hover:shadow-green-500"
+                        @click="changeStatus"
+                      >
+                        Change to {{ state == states.auto ? 'Manual' : 'Auto' }} Mode
+                      </div>
+                  </div>
+                </div>
               </div>
             </div>
           </CardInfo>
-          <CardInfo class="row-span-2 col-span-2 p-6">
+          <CardInfo class="row-span-3 col-span-2 p-6">
             <div class="grid grid-cols-3 gap-6 h-full w-full">
               <!-- Temperature -->
               <CardDetailInfo>
@@ -52,8 +66,21 @@
                       <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 14 14"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="2" cy="2" r="1.5"/><path d="M13.5 1.84a6 6 0 1 0-2 11.66a6 6 0 0 0 2-.34"/></g></svg>
                     </div>
                     <div class="flex items-center gap-1">
-                      <span>{{ temperature*9/5 + 32 }}</span>
+                      <span>{{ Math.round(temperature*9/5 + 32) }}</span>
                       <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 14 14"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="2.5" cy="2" r="1.5"/><path d="M7 13.5v-12h6M7 7h4"/></g></svg>
+                    </div>
+                  </div>
+                  <div class="w-full mt-2 pl-4 flex justify-center">
+                    <div class="text-left text-lg flex gap-4">
+                      <span class="opacity-60">Condition:</span>
+                      <span v-if="!updateTempCondition">{{ tempCondition }}</span>
+                      <input v-else v-model="tempConditionNew" class="w-10 rounded-md text-black bg-gray-200 px-2" />
+                      <div
+                        class="bg-green-400 hover:shadow-md hover:bg-green-600 hover:shadow-green-500
+                          cursor-pointer px-2 font-semibold rounded-md"
+                        @click="updateConditionForTemperature"
+                        > {{ updateTempCondition ? 'Save' : 'Update' }}
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -68,6 +95,19 @@
                       <span>{{ humidity }}%</span>
                     </div>
                   </div>
+                  <div class="w-full mt-2 pl-4 flex justify-center">
+                    <div class="text-left text-lg flex gap-4">
+                      <span class="opacity-60">Condition:</span>
+                      <span v-if="!updateHumidityCondition">{{ humidityCondition }}%</span>
+                      <input v-else v-model="humidityConditionNew" class="w-10 rounded-md text-black bg-gray-200 px-2" />
+                      <div
+                        class="bg-green-400 hover:shadow-md hover:bg-green-600 hover:shadow-green-500
+                          cursor-pointer px-2 font-semibold rounded-md"
+                        @click="updateConditionForHumidity"
+                        > {{ updateHumidityCondition ? 'Save' : 'Update' }}
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </CardDetailInfo>
               <!-- Soil humidity -->
@@ -80,11 +120,24 @@
                       <span>{{ soilMoisture }}%</span>
                     </div>
                   </div>
+                  <div class="w-full mt-2 pl-4 flex justify-center">
+                    <div class="text-left text-lg flex gap-4">
+                      <span class="opacity-60">Condition:</span>
+                      <span v-if="!updateSoilCondition">{{ soilCondition }}%</span>
+                      <input v-else v-model="soilConditionNew" class="w-10 rounded-md text-black bg-gray-200 px-2" />
+                      <div
+                        class="bg-green-400 hover:shadow-md hover:bg-green-600 hover:shadow-green-500
+                          cursor-pointer px-2 font-semibold rounded-md"
+                        @click="updateConditionForSoil"
+                        > {{ updateSoilCondition ? 'Save' : 'Update' }}
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </CardDetailInfo>
             </div>
           </CardInfo>
-          <CardInfo class="row-span-2 col-span-2 p-6">
+          <CardInfo class="row-span-3 col-span-2 p-6">
             <div class="grid grid-cols-2 gap-6 h-full w-full">
               <!-- Water pump -->
               <CardDetailInfo>
@@ -164,20 +217,22 @@
 import CardInfo from '../components/Card.vue';
 import CardDetailInfo from '../components/CardDetail.vue';
 import ToggleButton from '../components/Button/Toggle.vue';
+import InfoLine from '../components/InfoLine.vue';
 import mqtt from "mqtt";
 
 const topics = {
   temperature: 'NHIETDO',
   humidity: 'DOAM',
   soilMoisture: 'DOAMDAT',
-  light: 'AUTO_BONGDEN',
-  waterPump: 'AUTO_MAYBOM',
-  m_light: 'MANUAL_BONGDEN',
-  m_waterPump: 'MANUAL_MAYBOM',
+  light: 'BONGDEN',
+  waterPump: 'MAYBOM',
   wifi: 'WIFI',
   state: 'STATE',
+  condition: 'CONDITION',
   websiteWaterPump: 'WEBSITE_PUMP',
   websiteLight: 'WEBSITE_LIGHT',
+  websiteState: 'WEBSITE_STATE',
+  websiteCondition: 'WEBSITE_CONDITION',
 }
 
 const states = {
@@ -196,25 +251,66 @@ const lightActive = ref(false);
 const waterPumpActive = ref(false);
 const disabledDevice = ref(false);
 
+const updateTempCondition = ref(false)
+const tempCondition = ref(30)
+const tempConditionNew = ref(30)
+
+const updateHumidityCondition = ref(false)
+const humidityCondition = ref(70)
+const humidityConditionNew = ref(70)
+
+const updateSoilCondition = ref(false)
+const soilCondition = ref(70)
+const soilConditionNew = ref(70)
+
 const updateWaterPump = () => {
-    waterPumpActive.value = !waterPumpActive.value;
-    if (waterPumpActive.value) {
-      doPublish(topics.websiteWaterPump, "ON", 0);
-      console.log('WaterPump turn ON');
-    } else {
-      doPublish(topics.websiteWaterPump, "OFF", 0);
-      console.log('WaterPump turn OFF');
-    }
+  if (waterPumpActive.value) {
+    doPublish(topics.websiteWaterPump, "OFF", 0);
+    console.log('WaterPump turn OFF');
+  } else {
+    doPublish(topics.websiteWaterPump, "ON", 0);
+    console.log('WaterPump turn ON');
+  }
 }
 const updateLight = () => {
-    lightActive.value = !lightActive.value
-    if (lightActive.value) {
-      doPublish(topics.websiteLight, "ON", 0);
-      console.log('Light turn ON');
-    } else {
-      doPublish(topics.websiteLight, "OFF", 0);
-      console.log('Light turn OFF');
-    }
+  if (lightActive.value) {
+    doPublish(topics.websiteLight, "OFF", 0);
+    console.log('Light turn OFF');
+  } else {
+    doPublish(topics.websiteLight, "ON", 0);
+    console.log('Light turn ON');
+  }
+}
+
+const changeStatus = () => {
+  if (state.value == states.auto) {
+    doPublish(topics.websiteState, states.manual, 0);
+    console.log('Change to Manual mode');
+  } else {
+    doPublish(topics.websiteState, states.auto, 0);
+    console.log('Change to Auto mode');
+  }
+}
+
+const updateConditionForTemperature = () => {
+  if (updateTempCondition.value) {
+    doPublish(topics.websiteCondition, `T:${tempConditionNew.value}`, 0);
+  }
+  updateTempCondition.value = !updateTempCondition.value;
+}
+
+const updateConditionForHumidity = () => {
+  if (updateHumidityCondition.value) {
+    doPublish(topics.websiteCondition, `H:${humidityConditionNew.value}`, 0);
+  }
+  updateHumidityCondition.value = !updateHumidityCondition.value
+}
+
+const updateConditionForSoil = () => {
+  if (updateSoilCondition.value) {
+    doPublish(topics.websiteCondition, `S:${soilConditionNew.value}`, 0);
+  }
+  updateSoilCondition.value = !updateSoilCondition.value
 }
 
 watch(state, (value) => {
@@ -307,12 +403,19 @@ client.on("message", (topic: string, message) => {
       lightActive.value = message.toString() == 'ON' ? true : false
       break;
     }
-    case topics.m_waterPump: {
-      waterPumpActive.value = message.toString() == 'ON' ? true : false
+    case topics.state: {
+      state.value = message.toString()
       break;
     }
-    case topics.m_light: {
-      lightActive.value = message.toString() == 'ON' ? true : false
+    case topics.condition: {
+      const msg = message.toString().split(':');
+      if (msg[0] == 'T') {
+        tempCondition.value = +msg[1];
+      } else if (msg[0] == 'H') {
+        humidityCondition.value = +msg[1];
+      } else {
+        soilCondition.value = +msg[1];
+      }
       break;
     }
   }
