@@ -1,6 +1,26 @@
-# Nuxt 3 Minimal Starter
+# EDC - Environment Devices Controller
 
-Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+A website for monitoring and controlling microcontroller devices through the MQTT protocol.
+
+### What the application does ?
+
+
+
+### Why we used the MQTT protocol ?
+
+
+
+### Why we chosen the NuxtJs ?
+
+
+
+### Feature
+
+
+
+### Challenges and upcoming plans
+
+
 
 ## Setup
 
